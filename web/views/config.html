@@ -1,0 +1,246 @@
+<main class="app-content">
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-gear"></i> 配置管理</h1>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item"><a href="/">首页</a></li>
+            <li class="breadcrumb-item active"><a href="#">配置管理</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            {{ if eq .UserRole "superadmin" "admin" }}
+            <div class="tile">
+                <h3 class="tile-title">端口扫描默认配置</h3>
+                <div class="tile-body">
+                    <form>
+                        <div class="form-group">
+                            <label class="col-form-label" for="select_cmdbin">
+                                <b>默认扫描程序</b>
+                            </label>
+                            <select class="form-control" id="select_cmdbin">
+                                <option value="masscan">masscan</option>
+                                <option value="nmap">nmap</option>
+                            </select>
+                            <label class="col-form-label" for="input_port">
+                                <b>默认扫描端口:</b>（支持Nmap格式的端口列表）
+                            </label>
+                            <input class="form-control" id="input_port" type="text"
+                                   placeholder="--top-ports 1000（支持Nmap格式的端口列表）" value="">
+                            <label for="select_tech"><b>NMAP探测技术</b></label>
+                            <select class="form-control" id="select_tech">
+                                <option value="-sS">-sS</option>
+                                <option value="-sT">-sT</option>
+                                <option value="-sV">-sV</option>
+                            </select>
+                            <label for="input_rate"><b>扫描速度</b></label>
+                            <input class="form-control" id="input_rate" type="text" placeholder="3000（默认）"
+                                   value="">
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="checkbox_ping">
+                                <input class="form-check-input" id="checkbox_ping" type="checkbox">PING
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="tile-footer">
+                    <button class="btn btn-primary" type="button" id="buttonSaveNmap"><i
+                            class="fa fa-fw fa-lg fa-check-circle"></i>保存设置
+                    </button>&nbsp;&nbsp;&nbsp;
+                </div>
+            </div>
+            <div class="tile">
+                <h3 class="tile-title">指纹获取默认配置</h3>
+                <div class="tile-body">
+                    <form>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="checkbox_httpx">
+                                <input class="form-check-input" id="checkbox_httpx" type="checkbox">Httpx
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="checkbox_fingerprinthub">
+                                <input class="form-check-input" id="checkbox_fingerprinthub" type="checkbox">FingerprintHub
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="checkbox_screenshot">
+                                <input class="form-check-input" id="checkbox_screenshot" type="checkbox">Screenshot
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" for="checkbox_iconhash">
+                                <input class="form-check-input" id="checkbox_iconhash" type="checkbox">IconHash
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="tile-footer">
+                    <button class="btn btn-primary" type="button" id="buttonSaveFingerprint"><i
+                            class="fa fa-fw fa-lg fa-check-circle"></i>保存设置
+                    </button>&nbsp;&nbsp;&nbsp;
+                </div>
+            </div>
+            <div class="tile">
+                <h3 class="tile-title">任务切分设置</h3>
+                <div class="tile-body">
+                    <form>
+                        <div class="form-group">
+                            <label class="col-form-label" for="input_ipslicenumber">
+                                <b>IP切分数量</b>
+                            </label>
+                            <input class="form-control" id="input_ipslicenumber" type="text" value="">
+                            <label class="col-form-label" for="input_portslicenumber">
+                                <b>端口切分数量</b>
+                            </label>
+                            <input class="form-control" id="input_portslicenumber" type="text" value="">
+                        </div>
+                    </form>
+                </div>
+                <div class="tile-footer">
+                    <button class="btn btn-primary" type="button" id="buttonSaveTaskSlice"><i
+                            class="fa fa-fw fa-lg fa-check-circle"></i>保存设置
+                    </button>&nbsp;&nbsp;&nbsp;
+                </div>
+            </div>
+            {{ end }}
+            <div class="tile">
+                <h3 class="tile-title">Version&nbsp;<span id="nemo_version"></span></h3>
+                <div class="tile-body">
+                </div>
+                <div class="tile-footer">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="tile">
+                <h3 class="tile-title">修改登录密码</h3>
+                <div class="tile-body">
+                    <div class="form-group row">
+                        <label class="control-label col-md-3"> 原始密码</label>
+                        <div class="col-md-8">
+                            <input class="form-control" id="input_oldpass" type="password" placeholder="old password"
+                                   value="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-3">修改后的新密码</label>
+                        <div class="col-md-8">
+                            <input class="form-control" id="input_password1" type="password" placeholder="new password"
+                                   value="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-3">确认修改新密码</label>
+                        <div class="col-md-8">
+                            <input class="form-control" id="input_password2" type="password"
+                                   placeholder="confirm password" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="tile-footer">
+                    <button class="btn btn-primary" type="button" id="buttonChangPassword"><i
+                            class="fa fa-fw fa-lg fa-check-circle"></i>保存设置
+                    </button>&nbsp;&nbsp;&nbsp;
+                </div>
+            </div>
+            {{ if eq .UserRole "superadmin" "admin" }}
+            <div class="tile">
+                <h3 class="tile-title">API Token</h3>
+                <div class="tile-body">
+                    <form>
+                        <div class="form-group">
+                            <label class="col-form-label" for="input_fofa_user">
+                                <b>FOFA Token</b>
+                            </label>
+                            <input class="form-control" id="input_fofa_user" type="text" placeholder="fofa token email"
+                                   value="">
+                            <input class="form-control" id="input_fofa_token" type="text" placeholder="fofa token"
+                                   value="">
+                            <label class="col-form-label" for="input_hunter_token">
+                                <b>Hunter Token</b>
+                            </label>
+                            <input class="form-control" id="input_hunter_token" type="text" placeholder="hunter token"
+                                   value="">
+                            <label class="col-form-label" for="input_quake_token">
+                                <b>Quake Token</b>
+                            </label>
+                            <input class="form-control" id="input_quake_token" type="text" placeholder="quake token"
+                                   value="">
+                            <label class="col-form-label" for="input_chinaz_token">
+                                <b>Chinaz ICP Token</b>
+                            </label>
+                            <input class="form-control" id="input_chinaz_token" type="text"
+                                   placeholder="chinaz icp token"
+                                   value="">
+                        </div>
+                    </form>
+                </div>
+                <div class="tile-footer">
+                    <button class="btn btn-primary" type="button" id="buttonSaveAPIToken"><i
+                            class="fa fa-fw fa-lg fa-check-circle"></i>保存设置
+                    </button>&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-primary" type="button" id="buttonTestAPIToken"><i
+                            class="fa fa-fw fa-lg fa-podcast"></i>测试API
+                    </button>&nbsp;&nbsp;&nbsp;
+                </div>
+            </div>
+            <div class="tile">
+                <h3 class="tile-title">任务消息通知Token</h3>
+                <div class="tile-body">
+                    <form>
+                        <div class="form-group">
+                            <label class="col-form-label" for="input_serverchan">
+                                <b>Server酱<a href="https://sct.ftqq.com/" target="_blank"><i
+                                        class="fa fa-fw fa-external-link" aria-hidden="true"></i></a></b>
+                            </label>
+                            <input class="form-control" id="input_serverchan" type="text" placeholder="serverchan token"
+                                   value="">
+                            <label class="col-form-label" for="input_dingtalk">
+                                <b>钉钉群机器人<a href="https://open.dingtalk.com/document/group/custom-robot-access"
+                                                  target="_blank"><i class="fa fa-fw fa-external-link"
+                                                                     aria-hidden="true"></i></a></b>
+                            </label>
+                            <input class="form-control" id="input_dingtalk" type="text"
+                                   placeholder="dingtalk robot token" value="">
+                            <label class="col-form-label" for="input_feishu">
+                                <b>飞书群机器人<a
+                                        href="https://open.feishu.cn/document/ukTMukTMukTM/ucTM5YjL3ETO24yNxkjN"
+                                        target="_blank"><i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a></b>
+                            </label>
+                            <input class="form-control" id="input_feishu" type="text" placeholder="feishu robot token"
+                                   value="">
+                        </div>
+                    </form>
+                </div>
+                <div class="tile-footer">
+                    <button class="btn btn-primary" type="button" id="buttonSaveNotify"><i
+                            class="fa fa-fw fa-lg fa-check-circle"></i>保存设置
+                    </button>
+                    <button class="btn btn-primary" type="button" id="buttonTestNotify"><i
+                            class="fa fa-fw fa-lg fa-podcast"></i>测试消息通知
+                    </button>&nbsp;&nbsp;&nbsp;
+                </div>
+            </div>
+            {{ end }}
+        </div>
+        <div class="clearix"></div>
+    </div>
+</main>
+<script src="static/js/jquery/jquery-3.3.1.min.js"></script>
+<script src="static/js/bootstrap/popper.min.js"></script>
+<script src="static/js/bootstrap/bootstrap.min.js"></script>
+<script src="static/js/main.js"></script>
+<script src="static/js/plugins/pace.min.js"></script>
+<script src="static/js/plugins/jquery.dataTables.min.js"></script>
+<script src="static/js/plugins/dataTables.bootstrap.min.js"></script>
+<script src="static/js/sweetalert/sweetalert.min.js"></script>
+<script src="static/js/jquery/jquery.bootstrap-duallistbox.js"></script>
+<script src="static/js/server/config.js"></script>

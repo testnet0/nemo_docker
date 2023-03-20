@@ -1,0 +1,46 @@
+rpc:
+  host: 127.0.0.1
+  port: 5001
+  authKey: ZduibTKhcbb6Pi8W
+fileSync:
+  host: 127.0.0.1
+  port: 5002
+  authKey: ZduibTKhcbb6Pi8W
+rabbitmq:
+  host: localhost
+  port: 5672
+  username: guest
+  password: guest
+api:
+  fofa:
+    name: ""
+    key: ""
+  icp:
+    name: chinaz
+    key: ""
+  quake:
+    name: ""
+    key: ""
+  hunter:
+    name: ""
+    key: ""
+portscan:
+  ping: true
+  port: --top-ports 1000
+  rate: 1000
+  tech: -sS
+  cmdbin: nmap
+fingerprint:
+  httpx: true
+  screenshot: true
+  fingerprinthub: true
+  iconhash: true
+domainscan:
+  resolver: resolver.txt
+  wordlist: subnames.txt
+  providerConfig: provider-config.yml
+pocscan:
+  xray:
+    pocPath: thirdparty/xray/xray/pocs
+  nuclei:
+    pocPath: thirdparty/nuclei/nuclei-templates
